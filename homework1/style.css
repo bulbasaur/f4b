@@ -1,0 +1,201 @@
+:root {
+    --color-theme-beige: #fffae6;
+    --color-theme-peach: #ff9f66;
+    --color-theme-orange: #ff5f00;
+    --color-theme-navy: #002379;
+}
+
+/* Fonts */
+@font-face {
+    font-family: 'Poppins';
+    src: url('fonts/Poppins-Regular.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Poppins';
+    font-style: italic;
+    src: url('fonts/Poppins-Italic.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 300;
+    src: url('fonts/Poppins-Light.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    src: url('fonts/Poppins-Medium.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 700;
+    src: url('fonts/Poppins-Bold.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 800;
+    src: url('fonts/Poppins-ExtraBold.ttf') format('truetype');
+}
+
+html {
+    height: 100%;
+    background-color: var(--color-theme-beige);
+    font-family: 'Poppins', sans-serif;
+}
+body {
+    margin: 0;
+    display: grid;
+    grid-template-rows: auto auto 1fr auto;
+    min-height: 100%;
+}
+header {
+    padding: 0;
+}
+main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1em;
+}
+
+a {
+    color: var(--color-theme-beige);
+}
+a:hover {
+    color: var(--color-theme-orange);
+}
+
+/* Add a border left and border right to the first letter of h2 */
+header > h1::first-letter {
+    content: "";
+    border-left: 2px solid var(--color-theme-orange);
+    border-top: 2px solid var(--color-theme-orange);
+    padding-left: 0.25em;
+}
+
+/* Headers */
+h1 {
+    text-align: center;
+}
+h1::first-letter, h2::first-letter, h3::first-letter {
+    color: var(--color-theme-orange);
+}
+h1::first-letter {
+    font-size: 200%;
+}
+h2::first-letter {
+    font-size: 150%;
+}
+h2::first-letter {
+    font-size: 130%;
+}
+
+/* Navigation */
+nav {
+    background-color: var(--color-theme-navy);
+    color: var(--color-theme-beige);
+    padding: 1em;
+}
+nav ul {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: center;
+    padding: 0;
+    max-width: 1200px;
+    margin: 0 auto;
+    list-style-type: none;
+}
+
+nav ul li:first-child {
+    flex: 1;
+}
+
+nav a {
+    color: var(--color-theme-beige);
+    text-decoration: none;
+}
+
+
+/* Projects */
+.projects-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1em;
+}
+
+/* Cards */
+.card {
+    display: flex;
+    flex-direction: column;
+}
+.card > figure {
+    margin: 0;
+}
+.card img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+.card .content {
+    padding: 1em;
+    background-color: var(--color-theme-peach);
+}
+.card:nth-child(2) {
+    flex-direction: column-reverse;
+    align-self: flex-start;
+}
+.card:nth-child(2) .content h3::after {
+    content: " (In Progress)";
+    margin-right: 0.5em;
+    font-size: 0.7em;
+    font-weight: 300;
+}
+.card:nth-child(2) .content ul ~ p {
+    font-style: italic;
+}
+.card:nth-child(2) .content ul li:nth-of-type(2) {
+    color: var(--color-theme-navy);
+}
+
+/* Footer */
+footer  {
+    background-color: var(--color-theme-navy);
+}
+footer > section {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 1em;
+    color: var(--color-theme-beige);
+    text-align: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+footer > section div {
+    text-align: left;
+}
+footer div:first-child {
+    margin-right: 20px;
+}
+footer ul li a {
+    text-decoration: none;
+}
+footer div:last-child ul {
+    padding: 0;
+    list-style-type: none;
+}
+footer div:last-child ul li:last-of-type a {
+    color: red;
+}
+footer div:last-child ul li:last-of-type a:hover {
+    color: green;
+}
+
+@media (min-width: 768px) {
+    nav ul {
+        flex-direction: row;
+    }
+}
