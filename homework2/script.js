@@ -148,7 +148,7 @@ updateDisplay = () => {
     const operand2 = getValueFromGlobalScope('calc_operand2') ?? '';
     const operator = getValueFromGlobalScope('calc_operator') ?? '';
 
-    let displayText = operand1 ? `${operand1} ${operator} ${operand2}` : operand1;
+    let displayText = `${operand1} ${operator} ${operand2}`;
 
     if (getValueFromGlobalScope('calc_result')) {
         displayText += ` = ${getValueFromGlobalScope('calc_result')}`;
