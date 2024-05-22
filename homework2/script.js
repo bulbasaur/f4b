@@ -30,8 +30,6 @@ document.getElementById('calculate-btn').addEventListener('click', (event) => {
         alert(error.message);
         return;
     }
-    
-    console.log(result);
 
     alert(`The result is: ${result}`);
 });   
