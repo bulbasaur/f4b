@@ -176,6 +176,8 @@ document.getElementById('show-localStorage-btn').addEventListener('click', (even
         localStorageContent += `${key}: ${localStorage.getItem(key)}\n`;
     });
     
+    console.log(localStorageContent);
+
     document.getElementById('localStorage-data').innerText = localStorageContent;
 });
 
