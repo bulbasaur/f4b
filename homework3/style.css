@@ -1,0 +1,37 @@
+main section {
+    margin-top: 1em;
+    padding-top: 1em;
+    border-top: 1px dashed #ccc;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+form label {
+    font-weight: bold;
+}
+
+form .hint {
+    display: block;
+    font-size: 0.9em;
+}
+
+.numpad {
+    display: grid;
+    grid-template-columns: 100px 100px;
+}
+.numpad .numbers {
+    display: grid;
+    grid-template-columns: 20px 20px 20px;
+    grid-auto-rows: min-content;
+    gap: 0.2em;
+}
+.numpad .operators {
+    display: grid;
+    grid-template-columns: 20px 20px;
+    grid-auto-rows: min-content;
+    gap: 0.2em;
+}
