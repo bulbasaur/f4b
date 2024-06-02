@@ -9,7 +9,7 @@ document.getElementById('operand2').addEventListener('blur', (event) => {
 });
 
 document.getElementById('operator').addEventListener('blur', (event) => {
-    const operatorValue = event.target.value;
+    const operatorValue = String(event.target.value);
     storeValueInGlobalScope('operator', operatorValue);
 });
 
@@ -66,23 +66,44 @@ class Calculator {
 }
 
 // Helper functions
+const localStorageCalculatorKey = 'calculator';
+
 function storeValueInGlobalScope(name, value) {
-    value = JSON.stringify(value);
-    localStorage.setItem(name, value);
+    calculatorLocalStoreObject = JSON.parse(localStorage.getItem(localStorageCalculatorKey)) ?? {};
+    calculatorLocalStoreObject[name] = value;
+
+    localStorage.setItem(localStorageCalculatorKey, JSON.stringify(calculatorLocalStoreObject));
 }
 
 function getValueFromGlobalScope(name) {
-    return JSON.parse(localStorage.getItem(name));
+    calculatorLocalStoreObject = JSON.parse(localStorage.getItem(localStorageCalculatorKey)) ?? {};
+
+    return calculatorLocalStoreObject[name];
 }
 
 function removeValueFromGlobalScope(name) {
-    localStorage.removeItem(name)
+    calculatorLocalStoreObject = JSON.parse(localStorage.getItem(localStorageCalculatorKey)) ?? {};
+    delete calculatorLocalStoreObject[name];
+
+    localStorage.setItem(localStorageCalculatorKey, JSON.stringify(calculatorLocalStoreObject));
 }
 
-// Numpad calculator
-window.onload = () => {
-    storeValueInGlobalScope('hasFirstOperand', false);
+const updateDisplay = () => {
+    const operand1 = getValueFromGlobalScope('calc_operand1') ?? '';
+    const operand2 = getValueFromGlobalScope('calc_operand2') ?? '';
+    const operator = getValueFromGlobalScope('calc_operator') ?? '';
+
+    let displayText = `${operand1} ${operator} ${operand2}`;
+
+    if (getValueFromGlobalScope('calc_result')) {
+        displayText += ` = ${getValueFromGlobalScope('calc_result')}`;
+    }
+
+    const displayElement = document.getElementById('display');
+    displayElement.innerHTML = displayText;
 }
+
+updateDisplay();
 
 document.querySelectorAll('.numpad-operand-btn').forEach((button) => {
     button.addEventListener('click', (event) => {
@@ -151,34 +172,19 @@ document.getElementById('numpad-clear-btn').addEventListener('click', (event) =>
     updateDisplay();
 });
 
-updateDisplay = () => {
-    const operand1 = getValueFromGlobalScope('calc_operand1') ?? '';
-    const operand2 = getValueFromGlobalScope('calc_operand2') ?? '';
-    const operator = getValueFromGlobalScope('calc_operator') ?? '';
-
-    let displayText = `${operand1} ${operator} ${operand2}`;
-
-    if (getValueFromGlobalScope('calc_result')) {
-        displayText += ` = ${getValueFromGlobalScope('calc_result')}`;
-    }
-
-    const displayElement = document.getElementById('display');
-    displayElement.innerHTML = displayText;
-}
-
 document.getElementById('show-localStorage-btn').addEventListener('click', (event) => {
     event.preventDefault();
 
-    const localStorageKeys = Object.keys(localStorage);
-    let localStorageContent = '';
-    
-    localStorageKeys.forEach((key) => {
-        localStorageContent += `${key}: ${localStorage.getItem(key)}\n`;
-    });
+    const localStorageDataHolder = document.getElementById('localStorage-data');
+    const localStorageContent = JSON.parse(localStorage.getItem(localStorageCalculatorKey) ?? '{}');
+
+    localStorageDataHolder.innerText = '';
+
+    for (const [key, value] of Object.entries(localStorageContent)) {
+        localStorageDataHolder.innerText += `${key}: ${value}\n`;
+    }
     
     console.log(localStorageContent);
-
-    document.getElementById('localStorage-data').innerText = localStorageContent;
 });
 
 document.getElementById('clear-localStorage-btn').addEventListener('click', (event) => {
