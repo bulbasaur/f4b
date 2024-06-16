@@ -25,17 +25,18 @@ function getActivity(dayOfweek) {
     }
 }
 exports.getActivity = getActivity;
-class Queue {
-    constructor() {
+var Queue = /** @class */ (function () {
+    function Queue() {
         this.data = [];
     }
-    enqueue(item) {
+    Queue.prototype.enqueue = function (item) {
         this.data.push(item);
-    }
-    dequeue() {
+    };
+    Queue.prototype.dequeue = function () {
         return this.data.shift();
-    }
-}
+    };
+    return Queue;
+}());
 exports.Queue = Queue;
 function combine(input1, input2) {
     if (typeof input1 === 'string' && typeof input2 === 'string') {
@@ -49,33 +50,35 @@ function combine(input1, input2) {
     }
 }
 exports.combine = combine;
-class Worker {
-    constructor(position, salary) {
+var Worker = /** @class */ (function () {
+    function Worker(position, salary) {
         this.position = position;
         this.salary = salary;
     }
-    setSalary(salary) {
+    Worker.prototype.setSalary = function (salary) {
         this.salary = salary;
-    }
-    getSalary() {
+    };
+    Worker.prototype.getSalary = function () {
         return this.salary;
-    }
-}
+    };
+    return Worker;
+}());
 exports.Worker = Worker;
 // Description mentions IPerson interface but it is not used in the code
 // I'll create a WorkablePerson class that implements IPerson interface
-class WorkablePerson {
-    constructor(name, age, position, salary) {
+var WorkablePerson = /** @class */ (function () {
+    function WorkablePerson(name, age, position, salary) {
         this.name = name;
         this.age = age;
         this.position = position;
         this.salary = salary;
     }
-    setSalary(salary) {
+    WorkablePerson.prototype.setSalary = function (salary) {
         this.salary = salary;
-    }
-    getSalary() {
+    };
+    WorkablePerson.prototype.getSalary = function () {
         return this.salary;
-    }
-}
+    };
+    return WorkablePerson;
+}());
 exports.WorkablePerson = WorkablePerson;
