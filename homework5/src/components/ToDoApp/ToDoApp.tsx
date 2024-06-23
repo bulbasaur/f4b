@@ -30,8 +30,14 @@ export default class ToDoApp extends Component<Props, State> {
     console.log('ToDoApp mounted');
   }
 
-  componentWillUnmount() {
-    console.log('ToDoApp unmounted');
+  componentDidUpdate(prevProps: Props, prevState: State) {
+    if (prevState.todos !== this.state.todos) {
+      console.log('To-Do List updated');
+    }
+
+    if (prevState.filter !== this.state.filter) {
+      console.log('Filter updated');
+    }
   }
 
   getFilteredTodos = () => {
