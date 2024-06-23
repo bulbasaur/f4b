@@ -1,0 +1,28 @@
+.filters {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.filters button.active {
+    border: 2px solid green;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li svg {
+    margin-left: 10px;
+    color: red;
+    cursor: pointer;
+}
+
+li.completed svg {
+    color: green;
+}
+
+li button {
+    margin-left: 10px;
+}
