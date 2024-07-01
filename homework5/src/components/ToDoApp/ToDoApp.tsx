@@ -6,6 +6,7 @@ import './ToDoApp.css';
 type filters = 'all' | 'completed' | 'not-completed';
 
 type item = {
+  id: number;
   text: string;
   completed: boolean;
 };
@@ -19,9 +20,9 @@ type Props = {};
 export default class ToDoApp extends Component<Props, State> {
   state: State = {
     todos: [
-      { text: 'To-Do 1', completed: false },
-      { text: 'To-Do 2', completed: true },
-      { text: 'To-Do 3', completed: false },
+      { id: 1, text: 'To-Do 1', completed: false },
+      { id: 2, text: 'To-Do 2', completed: true },
+      { id: 3, text: 'To-Do 3', completed: false },
     ],
     filter: 'all',
   };
@@ -54,21 +55,28 @@ export default class ToDoApp extends Component<Props, State> {
   }
 
   handleToggleCompleted = (index: number) => {
-    const newTodos = [...this.state.todos];
-    newTodos[index].completed = !newTodos[index].completed;
+    let newTodos = [...this.state.todos];
+    const todoIndex = newTodos.findIndex(todo => todo.id === index);
+    newTodos[todoIndex].completed = !newTodos[todoIndex].completed;
     this.setState({ todos: newTodos });
   };
 
   handleDelete = (index: number) => {
-    const newTodos = [...this.state.todos];
-    newTodos.splice(index, 1);
+    let newTodos = [...this.state.todos];
+    newTodos = newTodos.filter(function( obj ) {
+      return obj.id !== index;
+    });
     this.setState({ todos: newTodos });
   }
 
   handleAddTodo = () => {
     const input = document.querySelector('input');
     if (input) {
-      const newTodo = { text: input.value, completed: false };
+      const max = this.state.todos.reduce(function(prev, current) {
+        return (prev && prev.id > current.id) ? prev : current
+      });
+      const newId = max ? max.id + 1 : 1;
+      const newTodo = { id: newId, text: input.value, completed: false };
       this.setState({ todos: [...this.state.todos, newTodo] });
       input.value = '';
     }
@@ -105,11 +113,11 @@ export default class ToDoApp extends Component<Props, State> {
               
               <FontAwesomeIcon 
                 icon={faFlag}
-                onClick={() => this.handleToggleCompleted(index)}
+                onClick={() => this.handleToggleCompleted(todo.id)}
               />
 
               <button
-                onClick={() => this.handleDelete(index)}
+                onClick={() => this.handleDelete(todo.id)}
               >Delete</button>
             </li>
           ))}
