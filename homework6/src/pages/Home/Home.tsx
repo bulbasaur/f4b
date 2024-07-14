@@ -17,7 +17,7 @@ const Home = () => {
         <ul>
           {books.map((book: any, index: number) => (
             <li key={index}>
-              <a href={`books/${index}`}>{book.title}</a>
+              <a href={`books/${index}`}>{book.title} | {book.author} | {book.rating}</a>
             </li>
           ))}
         </ul>

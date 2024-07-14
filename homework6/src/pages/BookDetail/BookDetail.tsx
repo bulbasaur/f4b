@@ -32,12 +32,12 @@ const BookDetail = () => {
     
         <h1>Book Details</h1>
         <div className="book-card">
-            <h2>{book?.title}</h2>
-            <p>{book?.author}</p>
-            <p>{book?.description}</p>
+            <h2>Title: {book?.title}</h2>
+            <p>Author: {book?.author}</p>
+            <p>Description: {book?.description}</p>
             <img src={book?.cover}/>
-            <p>{book?.genre}</p>
-            <p>{book?.rating}</p>
+            <p>Genre: {book?.genre}</p>
+            <p>Rating: {book?.rating}</p>
         </div>
       </div>
     );
